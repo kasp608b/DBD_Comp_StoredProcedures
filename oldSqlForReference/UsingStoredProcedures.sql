@@ -26,3 +26,14 @@ END
 go
 
 ALTER TABLE Employee ADD Age AS dbo.udf_getAge(Bdate)
+
+go
+BEGIN
+DECLARE @DNumber int;
+EXEC @DNumber = usp_CreateDepartment 'testdepartment',1254 ;
+PRINT @DNumber;
+END
+
+go
+
+INSERT INTO Employee (FName, Minit, LName, SSN, BDate, Address, Sex, Salary, SuperSSN, Dno) VALUES (N'TEST', N'E', N'Borg', 1254, N'1927-11-10', N'450 Stone, Houston, TX', N'M', 55000.00, NULL, 1)

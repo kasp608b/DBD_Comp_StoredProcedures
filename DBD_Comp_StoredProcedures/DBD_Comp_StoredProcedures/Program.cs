@@ -1,2 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+using System.Configuration;
+
+Console.WriteLine(ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString);

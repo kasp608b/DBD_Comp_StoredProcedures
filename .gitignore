@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+DBD_Comp_StoredProcedures/DBD_Comp_StoredProcedures/App.config

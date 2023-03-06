@@ -1,6 +1,6 @@
 --- usp_UpdateDepartmentName(DNumber, DName)
 --- If the new name is not already is use,The DName is updated to the new value. Else, an SQLException is thrown.
-CREATE OR ALTER PROCEDURE [dbo].[usp_UpdateDepartmentName]
+CREATE OR ALTER PROCEDURE usp_UpdateDepartmentName
 (
 	@DNumber int,
 	@DName varchar(50)

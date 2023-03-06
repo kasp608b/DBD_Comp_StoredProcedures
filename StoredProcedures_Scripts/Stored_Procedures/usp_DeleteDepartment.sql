@@ -1,9 +1,9 @@
--- Added ON DELETE CASCADE to Dept_Locations, Project, Works_on
--- Added ON DELETE SET NULL to Employee
--- if the department with DNumber exists, it is deleted.
--- All related tuples in the Dept_Locations relation is also deleted.
--- All related tuples in the Works_on relations is also deleted.
--- All employees in the Employee relation working in the deleted department should have the Dno attribute set to NULL.
+--- Added ON DELETE CASCADE to Dept_Locations, Project, Works_on
+--- Added ON DELETE SET NULL to Employee
+--- if the department with DNumber exists, it is deleted.
+--- All related tuples in the Dept_Locations relation is also deleted.
+--- All related tuples in the Works_on relations is also deleted.
+--- All employees in the Employee relation working in the deleted department should have the Dno attribute set to NULL.
 CREATE or alter PROCEDURE usp_DeleteDepartment
 (
 	@DNnumber int

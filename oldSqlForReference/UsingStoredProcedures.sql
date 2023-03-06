@@ -37,3 +37,11 @@ END
 go
 
 INSERT INTO Employee (FName, Minit, LName, SSN, BDate, Address, Sex, Salary, SuperSSN, Dno) VALUES (N'TEST', N'E', N'Borg', 1254, N'1927-11-10', N'450 Stone, Houston, TX', N'M', 55000.00, NULL, 1)
+
+go
+BEGIN
+EXEC usp_DeleteDepartment 987654321 ;
+
+END
+
+go

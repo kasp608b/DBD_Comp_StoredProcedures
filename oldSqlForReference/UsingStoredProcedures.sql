@@ -47,7 +47,7 @@ END
 go
 
 BEGIN
-EXEC usp_GetDepartment 4 ;
+EXEC usp_GetDepartment 1 ;
 
 END
 

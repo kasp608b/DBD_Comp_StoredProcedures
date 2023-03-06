@@ -77,7 +77,7 @@ END
 
 GO
 
-CREATE FUNCTION NumberOfEmployees(@DNnumber int)
+CREATE or alter FUNCTION NumberOfEmployees(@DNnumber int)
 RETURNS INT
 AS
 BEGIN
@@ -104,10 +104,7 @@ BEGIN
 	IF NOT EXISTS (SELECT 1 FROM Department WHERE DNumber = @DNnumber)
 		THROW 50001, 'Department dosent exist', 1
 
-	DECLARE @EmpCount int;
-	exec usp_NumberOfEmployees @DNnumber , @EmpCount OUTPUT
-
-	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , @EmpCount AS EmpCount
+	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , dbo.NumberOfEmployees(DNumber) AS EmpCount
 	FROM Department d
 	JOIN Employee e ON d.DNumber = e.Dno
 	WHERE DNumber = @DNnumber
@@ -121,9 +118,6 @@ CREATE or alter PROCEDURE usp_GetDepartments
 AS
 BEGIN 
 	SET NOCOUNT ON 
-
-	DECLARE @EmpCount int;
-	exec usp_NumberOfEmployees NULL , @EmpCount OUTPUT
 
 	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , dbo.NumberOfEmployees(DNumber) AS EmpCount
 	FROM Department d

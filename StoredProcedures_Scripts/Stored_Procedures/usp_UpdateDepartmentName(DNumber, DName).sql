@@ -8,7 +8,8 @@ CREATE or alter PROCEDURE usp_UpdateDepartmentName
 )
 AS
 BEGIN 
-	SET NOCOUNT ON 
+
+	SET XACT_ABORT ON;
 
 	IF EXISTS (SELECT 1 FROM Department WHERE DName = @DName)
 		THROW 50001, 'Department Name already in use ', 1

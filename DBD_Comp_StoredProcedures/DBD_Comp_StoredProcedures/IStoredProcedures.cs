@@ -3,5 +3,7 @@
     internal interface IStoredProcedures
     {
         int UpdateDepartmentName(int DNumber, string DName);
+
+        void GetAllDepartments();
     }
 }

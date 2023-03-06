@@ -6,6 +6,37 @@ namespace DBD_Comp_StoredProcedures
 {
     internal class StoredProcedures : IStoredProcedures
     {
+        public void GetAllDepartments()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString))
+            {
+                // Create command and set its properties
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandText = "usp_GetAllDepartments";
+                command.CommandType = CommandType.StoredProcedure;
+
+                // Open the connection and execute procedure
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("{0}: {1:C}", reader[0], reader[1]);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No rows found.");
+                    }
+                    reader.Close();
+                }
+
+            }
+        }
+
         public int UpdateDepartmentName(int DNumber, string DName)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString))
@@ -39,7 +70,6 @@ namespace DBD_Comp_StoredProcedures
                 // Open the connection and execute procedure
                 connection.Open();
                 int affectedRows = command.ExecuteNonQuery();
-                connection.Close();
 
                 return affectedRows;
             }

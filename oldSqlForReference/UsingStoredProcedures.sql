@@ -45,3 +45,8 @@ EXEC usp_DeleteDepartment 5 ;
 END
 
 go
+
+BEGIN
+EXEC usp_GetDepartment 4 ;
+
+END

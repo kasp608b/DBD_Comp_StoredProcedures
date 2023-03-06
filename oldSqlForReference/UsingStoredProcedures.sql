@@ -40,7 +40,7 @@ INSERT INTO Employee (FName, Minit, LName, SSN, BDate, Address, Sex, Salary, Sup
 
 go
 BEGIN
-EXEC usp_DeleteDepartment 987654321 ;
+EXEC usp_DeleteDepartment 5 ;
 
 END
 

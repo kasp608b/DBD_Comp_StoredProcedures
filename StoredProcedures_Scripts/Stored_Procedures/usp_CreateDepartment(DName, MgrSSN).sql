@@ -1,13 +1,15 @@
+--- usp_CreateDepartment(DName, MgrSSN)
+--- Changed the Department schema to be identity.
+--- The department must be created with an auto-generated DNumber, and theMgrStartdate set to the current date.
+--- The auto-generated DNumber should be returned by the procedure.
+--- If the DName already exists, an SQLException must be thrown and the department is not created.
+--- If the MgsSSN is already a department manager, an SQLException must bethrown and the department is not created.
 USE [master]
 GO
 
 USE Company					
 GO
--- Changed the Department schema to be identity.
--- The department must be created with an auto-generated DNumber, and theMgrStartdate set to the current date.
--- The auto-generated DNumber should be returned by the procedure.
--- If the DName already exists, an SQLException must be thrown and the department is not created.
--- If the MgsSSN is already a department manager, an SQLException must bethrown and the department is not created.
+
 CREATE or alter PROCEDURE usp_CreateDepartment
 (
 	@DName nvarchar(50),
@@ -32,3 +34,5 @@ BEGIN
 	
 
 END
+
+GO 

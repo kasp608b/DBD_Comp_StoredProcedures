@@ -50,3 +50,8 @@ BEGIN
 EXEC usp_GetDepartment 4 ;
 
 END
+
+BEGIN
+EXEC usp_GetDepartments;
+
+END

@@ -1,4 +1,6 @@
---- Changed the Department schema to be identity.
+
+--- usp_CreateDepartment(DName, MgrSSN)
+--- In order to have the DNumber be auto-generated we used SQL management studio to add identity to the DNumber.
 --- The department must be created with an auto-generated DNumber, and theMgrStartdate set to the current date.
 --- The auto-generated DNumber should be returned by the procedure.
 --- If the DName already exists, an SQLException must be thrown and the department is not created.
@@ -6,7 +8,8 @@
 CREATE or alter PROCEDURE usp_CreateDepartment
 (
 	@DName nvarchar(50),
-	@MgrSSN numeric
+	@MgrSSN numeric,
+	@DepId int OUTPUT
 )
 AS
 BEGIN 
@@ -23,9 +26,10 @@ BEGIN
 	INSERT INTO Department
 	VALUES(@DName,@MgrSSN,@theMgrStartdate)
 
-	return SCOPE_IDENTITY()
+	
+	SET @DepId = SCOPE_IDENTITY();
+	
 	
 
 END
-
 GO

@@ -3,21 +3,19 @@
 --- attribute named ‘EmpCount’ stating the total number of employees of that department.
 CREATE or alter PROCEDURE usp_GetDepartment
 (
-	@DNnumber int
+	@DNumber int
 )
 AS
 BEGIN 
-
-	IF NOT EXISTS (SELECT 1 FROM Department WHERE DNumber = @DNnumber)
+	IF NOT EXISTS (SELECT 1 FROM Department WHERE DNumber = @DNumber)
 		THROW 50001, 'Department dosent exist', 1
 
 	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , dbo.NumberOfEmployees(DNumber) AS EmpCount
 	FROM Department d
-	JOIN Employee e ON d.DNumber = e.Dno
-	WHERE DNumber = @DNnumber
+	LEFT OUTER JOIN Employee e ON d.DNumber = e.Dno
+	WHERE DNumber = @DNumber
 
 END
 
 GO
-
 

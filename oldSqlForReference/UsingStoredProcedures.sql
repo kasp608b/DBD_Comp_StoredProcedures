@@ -30,7 +30,7 @@ ALTER TABLE Employee ADD Age AS dbo.udf_getAge(Bdate)
 go
 BEGIN
 DECLARE @DNumber int;
-EXEC @DNumber = usp_CreateDepartment 'testdepartment',1254 ;
+EXEC @DNumber = usp_CreateDepartment 'testdepartment2',987987987 ;
 PRINT @DNumber;
 END
 
@@ -47,7 +47,7 @@ END
 go
 
 BEGIN
-EXEC usp_GetDepartment 1 ;
+EXEC usp_GetDepartment 8 ;
 
 END
 

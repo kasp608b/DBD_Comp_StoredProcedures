@@ -206,7 +206,13 @@ END
 GO
 
 -----------------------------------------------------------------------------------------------------------------
---- Stored Procedures Pre EmpCount change
+--- Adding calculated column EmpCount to the departemnt table
+-----------------------------------------------------------------------------------------------------------------
+
+ALTER TABLE Department ADD EmpCount AS dbo.NumberOfEmployees(DNumber)
+GO
+-----------------------------------------------------------------------------------------------------------------
+--- Stored Procedures
 -----------------------------------------------------------------------------------------------------------------
 
 --- usp_CreateDepartment(DName, MgrSSN)
@@ -307,9 +313,8 @@ BEGIN
 	IF NOT EXISTS (SELECT 1 FROM Department WHERE DNumber = @DNumber)
 		THROW 50001, 'Department dosent exist', 1
 
-	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , dbo.NumberOfEmployees(DNumber) AS EmpCount
+	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , EmpCount
 	FROM Department d
-	LEFT OUTER JOIN Employee e ON d.DNumber = e.Dno
 	WHERE DNumber = @DNumber
 
 END
@@ -323,12 +328,8 @@ GO
 CREATE or alter PROCEDURE usp_GetAllDepartments
 AS
 BEGIN 
-
-	SELECT DISTINCT DName, DNumber, MgrSSN, MgrStartDate , dbo.NumberOfEmployees(DNumber) AS EmpCount
-	FROM Department d
-	JOIN Employee e ON d.DNumber = e.Dno
-	ORDER BY DName
-
+	SELECT DName, DNumber, MgrSSN, MgrStartDate , EmpCount
+	FROM Department
 END
 
 GO

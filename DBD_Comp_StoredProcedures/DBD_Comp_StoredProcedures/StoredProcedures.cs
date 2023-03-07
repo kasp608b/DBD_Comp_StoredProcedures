@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using ConsoleTables;
 
 namespace DBD_Comp_StoredProcedures
 {
@@ -20,12 +21,27 @@ namespace DBD_Comp_StoredProcedures
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
+                    var table = new ConsoleTable();
+                    
+
+
                     if (reader.HasRows)
                     {
+                        var columns = new List<string>();
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            columns.Add(reader.GetName(i));
+                        }
+
+                        table.AddColumn(columns);
+
                         while (reader.Read())
                         {
-                            Console.WriteLine("{0}: {1:C}", reader[0], reader[1]);
+                            table.AddRow(reader[0], reader[1], reader[2], reader[3], reader[4]);
                         }
+
+                        table.Write();
                     }
                     else
                     {

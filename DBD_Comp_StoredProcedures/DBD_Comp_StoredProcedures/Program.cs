@@ -16,6 +16,7 @@ while (run)
 
         Console.WriteLine("\nHere's a list of all available procedures:");
         Console.WriteLine("1. Update the name of a Department");
+        Console.WriteLine("2. Get all Departments");
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
 
         Console.WriteLine("\nInput the corresponding number then press the enter key to invoke it");
@@ -29,7 +30,7 @@ while (run)
             break;
         }
 
-        if (userInput != "1")
+        if (userInput != "1" && userInput != "2")
         {
             Console.WriteLine("\nInvalid input. Please input a valid procedure number or press \"q\" or input \"quit\" then press the enter key to quit out");
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
@@ -43,6 +44,11 @@ while (run)
                 runProcedures = false;
                 break;
 
+            case "2":
+                ConsoleGetAllDepartments();
+                runProcedures = false;
+                break;
+
             default:
                 Console.WriteLine("\nReached unreachable code, which means something went wrong");
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
@@ -53,6 +59,32 @@ while (run)
 
 
 
+}
+
+void ConsoleGetAllDepartments()
+{
+    try
+    {
+        storedProcedures.GetAllDepartments();
+        Console.WriteLine("\nSucces");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
+        Console.WriteLine("Press any key to continue");
+        Console.ReadLine();
+    }
+    catch (SqlException e)
+    {
+        Console.WriteLine("\nAn SQl error occured: " + e.Message);
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
+        Console.WriteLine("Press any key to continue");
+        Console.ReadLine();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("\nAn error occured: " + ex.Message);
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
+        Console.WriteLine("Press any key to continue");
+        Console.ReadLine();
+    }
 }
 
 void ConsoleUpdateDepartmentName()

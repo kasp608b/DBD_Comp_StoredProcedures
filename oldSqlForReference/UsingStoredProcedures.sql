@@ -47,11 +47,11 @@ END
 go
 
 BEGIN
-EXEC usp_GetDepartment 8 ;
+EXEC usp_GetDepartment 4 ;
 
 END
 
 BEGIN
-EXEC usp_GetDepartments;
+EXEC usp_GetAllDepartments;
 
 END
